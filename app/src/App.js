@@ -28,10 +28,19 @@ class App extends React.Component {
   }
 
   getMonths(data) {
-    const start_month = data[0].date.substr(4, 6)
+    const year = data[0].date.substr(0, 4)
+    const start_month = data[0].date.substr(5, 2)
+    let end_month = ''
     let months_list = []
 
-    for (let i = Math.abs(parseInt(start_month)); i < 13; i++) {
+    for (let i = data.length - 1; i > 0; i--) {
+      if (data[i].date.substr(0, 4) == year) {
+        end_month = data[i].date.substr(5, 2)
+        break
+      }
+    }
+
+    for (let i = Math.abs(parseInt(start_month)); i <= Math.abs(parseInt(end_month)); i++) {
       months_list.push(i)
     }
 
