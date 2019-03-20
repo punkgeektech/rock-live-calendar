@@ -31,3 +31,33 @@
     transform: rotate(360deg);
   }
 }
+
+#wrapper {
+  display: flex;
+  width: 50vw;
+  margin: auto;
+}
+
+#nav, #list {
+  margin: 0;
+  padding: 0;
+}
+
+#nav li, #list li {
+  list-style-type: none;
+  margin: 1vw 0;
+}
+
+#nav {
+  width: 10%;
+  text-align: center;
+}
+
+#list {
+  width: 90%;
+  padding-left: 1vw;
+}
+
+#nav li:hover {
+  cursor: pointer;
+}

@@ -51,18 +51,16 @@ function listEvents(auth) {
   const calendar = google.calendar({version: 'v3', auth});
   calendar.events.list({
     calendarId: 'notoriousjay@gmail.com',
-    timeMin: (new Date()).toISOString(),
-    // maxResults: 10,
+    timeMin: (new Date(2019, 1, 1, 0, 0, 0, 0)).toISOString(),
+    maxResults: 2500,
     singleEvents: true,
     orderBy: 'startTime',
   }, (err, res) => {
     if (err) return console.log('The API returned an error: ' + err);
     const events = res.data.items;
     if (events.length) {
-      // console.log('Upcoming 10 events:');
       events.map((event, i) => {
         const start = event.start.dateTime || event.start.date;
-        // console.log(`${start} - ${event.summary}`);
         bands = event.summary.slice(0, event.summary.lastIndexOf('@')).trim('').split(', ')
         location = event.summary.slice(event.summary.lastIndexOf('@') + 2)
         data = {
