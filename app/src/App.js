@@ -30,6 +30,7 @@ class App extends React.Component {
   getMonths(data) {
     const year = data[0].date.substr(0, 4)
     const start_month = data[0].date.substr(5, 2)
+    const now = new Date()
     let end_month = ''
     let months_list = []
 
@@ -40,13 +41,13 @@ class App extends React.Component {
       }
     }
 
-    for (let i = Math.abs(parseInt(start_month)); i <= Math.abs(parseInt(end_month)); i++) {
+    for (let i = parseInt(start_month); i <= parseInt(end_month); i++) {
       months_list.push(i)
     }
 
     this.setState({
       months: months_list,
-      current: Math.abs(parseInt(start_month))
+      current: parseInt(now.getMonth() + 1)
     })
   }
 
@@ -57,6 +58,7 @@ class App extends React.Component {
   }
 
   render() {
+    console.log(this.state.current)
     return (
       <div id="wrapper">
         <Nav data={ this.state.months } navClick={ this.navClickHandler } />
