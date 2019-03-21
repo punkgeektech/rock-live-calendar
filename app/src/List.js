@@ -3,6 +3,35 @@ import React from 'react'
 class List extends React.Component {
   constructor(props) {
     super(props)
+
+    this.state = {
+      values: []
+    }
+
+    this.updateBand = this.updateBand.bind(this)
+    this.findBandValues = this.findBandValues.bind(this)
+  }
+
+  updateBand(e) {
+    const name = e.target.getAttribute('data-name')
+    const value = e.target.getAttribute('data-value')
+
+    fetch('http://127.0.0.1:3001/api/bands/' + name, {
+      method: 'PUT',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ value: parseInt(value) + 1 })
+    })
+    .then(res => res.text())
+    .then(res => console.log(res))
+  }
+
+  findBandValues(name) {
+    for (let i = 0; i < this.props.values.length; i++) {
+      if (this.props.values[i].name == name) {
+        return this.props.values[i].value
+        break
+      }
+    }
   }
 
   render() {
@@ -23,11 +52,13 @@ class List extends React.Component {
           { items[i].date == (items[i - 1] != undefined ? items[i - 1] : items[items.length - 1]).date ? '' : items[i].date }
         </div>
         <div>
-          Bands: { v.bands.map((vv) => (
-                    <span key={ vv }>
-                      { vv }
-                    </span>
-                  )) }<br />
+          Bands: { v.bands.map((vv, ii) => {
+                    return (
+                      <span data-name={ vv } data-value={ this.findBandValues(vv) } key={ vv } onClick={ this.updateBand }>
+                        { vv }
+                      </span>
+                    )
+                  }) }<br />
           Location: { v.location }
         </div>
       </li>

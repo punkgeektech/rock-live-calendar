@@ -11,7 +11,8 @@ class App extends React.Component {
     this.state = {
       data: [],
       months: [],
-      current: null
+      current: null,
+      bandValues: []
     }
 
     this.getMonths = this.getMonths.bind(this)
@@ -19,11 +20,17 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    fetch('http://127.0.0.1:3001/api')
+    fetch('http://127.0.0.1:3001/api/lists')
     .then(res => res.json())
     .then(data => {
-      this.setState({ data })
-      this.getMonths(data)
+      this.setState({ data: data.data })
+      this.getMonths(data.data)
+    })
+
+    fetch('http://127.0.0.1:3001/api/bands')
+    .then(res => res.json())
+    .then(data => {
+      this.setState({ bandValues: data.data })
     })
   }
 
@@ -62,7 +69,7 @@ class App extends React.Component {
     return (
       <div id="wrapper">
         <Nav data={ this.state.months } navClick={ this.navClickHandler } />
-        <List data={ this.state.data } currentMonth={ this.state.current } />
+        <List data={ this.state.data } currentMonth={ this.state.current } values={ this.state.bandValues } />
       </div>
     )
   }
