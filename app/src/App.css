@@ -58,6 +58,23 @@
   padding-left: 1vw;
 }
 
+#list li {
+  display: flex;
+}
+
+#list li div:first-child{
+  width: 15%;
+}
+
+#list li div:last-child{
+  width: 85%;
+}
+
+#list li span {
+  background-color: #efefef;
+  margin: 0 0.3vw;
+}
+
 #nav li:hover {
   cursor: pointer;
 }

@@ -17,11 +17,19 @@ class List extends React.Component {
       }
     })
 
-    const items = list.map((v, i) => (
+    const items = list.map((v, i, items) => (
       <li key={ i }>
-        { v.date }<br />
-        Bands: { v.bands }<br />
-        Location: { v.location }
+        <div>
+          { items[i].date == (items[i - 1] != undefined ? items[i - 1] : items[items.length - 1]).date ? '' : items[i].date }
+        </div>
+        <div>
+          Bands: { v.bands.map((vv) => (
+                    <span key={ vv }>
+                      { vv }
+                    </span>
+                  )) }<br />
+          Location: { v.location }
+        </div>
       </li>
     ))
 
