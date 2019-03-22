@@ -44,6 +44,13 @@ class List extends React.Component {
       }
     })
 
+    // sort list by date
+    const sorted_list = list.sort(function(a, b) {
+      return new Date(a.date.replace(/(\d{4})-(\d{2})-(\d{2})/, "$1/$2/$3")) - new Date(b.date.replace( /(\d{4})-(\d{2})-(\d{2})/, "$1/$2/$3"))
+    })
+
+    console.log(sorted_list)
+
     const items = list.map((v, i, items) => (
       <li key={ i }>
         <div>
