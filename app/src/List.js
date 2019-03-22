@@ -47,7 +47,7 @@ class List extends React.Component {
     const items = list.map((v, i, items) => (
       <li key={ i }>
         <div>
-          // conbine same month date
+          {/* conbine same month date */}
           { items[i].date == (items[i - 1] != undefined ? items[i - 1] : items[items.length - 1]).date ? '' : items[i].date }
         </div>
         <div>
