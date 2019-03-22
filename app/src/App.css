@@ -104,8 +104,23 @@ html, body {
   box-shadow: 1px 1px 1px #d8d8d8;
 }
 
+#list li .item-detail span.detail-name {
+  position: relative;
+}
+
 #list li .item-detail span.detail-name:hover {
   cursor: pointer;
+}
+
+#list li .item-detail span.detail-name .like-button {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  left: 0;
+  background-color: rgba(239,239,239,0.8);
+  color: rgb(255, 120, 0);
 }
 
 #list li .item-detail span.detail-location {
