@@ -1,4 +1,5 @@
 import React from 'react'
+import Fade from 'react-reveal/Fade';
 
 class List extends React.Component {
   constructor(props) {
@@ -59,40 +60,42 @@ class List extends React.Component {
 
       return (
         // add different classes depends on the date
-        <li className={ new Date(v.date.replace(/(\d{4})-(\d{2})-(\d{2})/, "$1/$2/$3")) - now < 0 ? ( ifNow ? "list-item today-item" : "list-item out-dated-item" ) : "list-item"} key={ i }>
-          <div className="item-date">
-            {/* conbine same month date */}
-            { items[i].date == (items[i - 1] != undefined ? items[i - 1] : items[items.length - 1]).date ? '' : items[i].date }
-          </div>
-          <div className="item-detail">
-            { v.bands.map((vv, ii) => {
-                let value = this.findBandValues(vv)
-                let bgcolor = { backgroundColor: '#a2aac5' }
+        <Fade bottom delay={ 100 } duration={ 500 } distance={'20px'} key={ i }>
+          <li className={ new Date(v.date.replace(/(\d{4})-(\d{2})-(\d{2})/, "$1/$2/$3")) - now < 0 ? ( ifNow ? "list-item today-item" : "list-item out-dated-item" ) : "list-item"}>
+            <div className="item-date">
+              {/* conbine same month date */}
+              { items[i].date == (items[i - 1] != undefined ? items[i - 1] : items[items.length - 1]).date ? '' : items[i].date }
+            </div>
+            <div className="item-detail">
+              { v.bands.map((vv, ii) => {
+                  let value = this.findBandValues(vv)
+                  let bgcolor = { backgroundColor: '#a2aac5' }
 
-                for (i = 1; i < 11; i++) {
-                  if ( value == i ) {
-                    // use background color to measure the value of band
-                    // Max color(darkest color) rgb(255, 120, 0) -- Min color(lightest color) rgb(255, 230, 220)
-                    // For test use: value criterion range (1 - 10), step: 1
-                    bgcolor = { backgroundColor: `rgb(255, ${ 230 - (i - 1) * 10 }, ${ 220 - (i - 1) * 20 })` }
-                    break
+                  for (i = 1; i < 11; i++) {
+                    if ( value == i ) {
+                      // use background color to measure the value of band
+                      // Max color(darkest color) rgb(255, 120, 0) -- Min color(lightest color) rgb(255, 230, 220)
+                      // For test use: value criterion range (1 - 10), step: 1
+                      bgcolor = { backgroundColor: `rgb(255, ${ 230 - (i - 1) * 10 }, ${ 220 - (i - 1) * 20 })` }
+                      break
+                    }
                   }
-                }
 
-                // set darkest color while value is over the max
-                if (value > 10) {
-                  bgcolor = { backgroundColor: 'rgb(255, 120 , 0)' }
-                }
+                  // set darkest color while value is over the max
+                  if (value > 10) {
+                    bgcolor = { backgroundColor: 'rgb(255, 120 , 0)' }
+                  }
 
-                return (
-                  <span className="detail-name" data-name={ vv } style={ bgcolor } data-value={ value } key={ vv } onClick={ this.updateBandValue }>
-                    { vv }
-                  </span>
-                )
-              }) }<br />
-              <span className="detail-location"><i class="fas fa-map-marker-alt"></i>{ v.location }</span>
-          </div>
-        </li>
+                  return (
+                    <span className="detail-name" data-name={ vv } style={ bgcolor } data-value={ value } key={ vv } onClick={ this.updateBandValue }>
+                      { vv }
+                    </span>
+                  )
+                }) }<br />
+                <span className="detail-location"><i class="fas fa-map-marker-alt"></i>{ v.location }</span>
+            </div>
+          </li>
+        </Fade>
       )
     })
 
