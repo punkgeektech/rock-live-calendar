@@ -35,7 +35,7 @@ class List extends React.Component {
   render() {
     const list = this.props.data.filter((v) => {
       const year = v.date.substr(0, 4)
-      const current_month = Math.abs(parseInt(v.date.substr(4, 6)))
+      const current_month = parseInt(v.date.substr(5, 2))
 
       if (year == '2019') {
         if (current_month == this.props.currentMonth) {
@@ -49,44 +49,50 @@ class List extends React.Component {
       return new Date(a.date.replace(/(\d{4})-(\d{2})-(\d{2})/, "$1/$2/$3")) - new Date(b.date.replace( /(\d{4})-(\d{2})-(\d{2})/, "$1/$2/$3"))
     })
 
-    console.log(sorted_list)
+    const now = new Date()
 
-    const items = list.map((v, i, items) => (
-      <li key={ i }>
-        <div>
-          {/* conbine same month date */}
-          { items[i].date == (items[i - 1] != undefined ? items[i - 1] : items[items.length - 1]).date ? '' : items[i].date }
-        </div>
-        <div>
-          Bands: { v.bands.map((vv, ii) => {
-                    let value = this.findBandValues(vv)
-                    let bgcolor = { backgroundColor: '#efefef' }
+    const items = list.map((v, i, items) => {
+      const month = now.getMonth() + 1
+      const day = now.getDate()
+      const ifNow = parseInt(v.date.substr(5, 2)) == month && parseInt(v.date.substr(8, 2)) == day
 
-                    for (i = 1; i < 11; i++) {
-                      if ( value == i ) {
-                        // use background color to measure the value of band
-                        // Max color(darkest color) rgb(255, 120, 0) -- Min color(lightest color) rgb(255, 230, 220)
-                        // For test use: value criterion range (1 - 10), step: 1
-                        bgcolor = { backgroundColor: `rgb(255, ${ 230 - (i - 1) * 10 }, ${ 220 - (i - 1) * 20 })` }
-                        break
-                      }
-                    }
+      return (
+        <li className={ new Date(v.date.replace(/(\d{4})-(\d{2})-(\d{2})/, "$1/$2/$3")) - now < 0 ? ( ifNow ? "list-item today-item" : "list-item out-dated-item" ) : "list-item"} key={ i }>
+          <div className="item-date">
+            {/* conbine same month date */}
+            { items[i].date == (items[i - 1] != undefined ? items[i - 1] : items[items.length - 1]).date ? '' : items[i].date }
+          </div>
+          <div className="item-detail">
+            { v.bands.map((vv, ii) => {
+                let value = this.findBandValues(vv)
+                let bgcolor = { backgroundColor: '#a2aac5' }
 
-                    // set darkest color while value is over the max
-                    if (value > 10) {
-                      bgcolor = { backgroundColor: 'rgb(255, 120 , 0)' }
-                    }
+                for (i = 1; i < 11; i++) {
+                  if ( value == i ) {
+                    // use background color to measure the value of band
+                    // Max color(darkest color) rgb(255, 120, 0) -- Min color(lightest color) rgb(255, 230, 220)
+                    // For test use: value criterion range (1 - 10), step: 1
+                    bgcolor = { backgroundColor: `rgb(255, ${ 230 - (i - 1) * 10 }, ${ 220 - (i - 1) * 20 })` }
+                    break
+                  }
+                }
 
-                    return (
-                      <span data-name={ vv } style={ bgcolor } data-value={ value } key={ vv } onClick={ this.updateBandValue }>
-                        { vv }
-                      </span>
-                    )
-                  }) }<br />
-          Location: { v.location }
-        </div>
-      </li>
-    ))
+                // set darkest color while value is over the max
+                if (value > 10) {
+                  bgcolor = { backgroundColor: 'rgb(255, 120 , 0)' }
+                }
+
+                return (
+                  <span className="detail-name" data-name={ vv } style={ bgcolor } data-value={ value } key={ vv } onClick={ this.updateBandValue }>
+                    { vv }
+                  </span>
+                )
+              }) }<br />
+              <span className="detail-location"><i class="fas fa-map-marker-alt"></i>{ v.location }</span>
+          </div>
+        </li>
+      )
+    })
 
     return (
       <ul id="list">{ items }</ul>

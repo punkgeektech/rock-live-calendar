@@ -32,6 +32,11 @@
   }
 }
 
+html, body {
+  font-family: 'Roboto', sans-serif;
+  color: #454545;
+}
+
 #wrapper {
   display: flex;
   width: 50vw;
@@ -49,30 +54,68 @@
 }
 
 #nav {
-  width: 10%;
+  width: 5%;
   text-align: center;
+  position: fixed;
+  left: 18vw;
+  top: -1px;
+  border: 1px solid #a2aac5;
+  border-radius: 0 0 0.5vw 0.5vw;
+  font-family: 'Exo 2', sans-serif;
 }
 
 #list {
-  width: 90%;
   padding-left: 1vw;
+  width: 100%;
 }
 
 #list li {
   display: flex;
 }
 
-#list li div:first-child{
+#list li div.item-date{
   width: 15%;
+  font-family: 'Exo 2', sans-serif;
 }
 
-#list li div:last-child{
+#list li div.item-detail{
   width: 85%;
+  font-size: 0.9rem;
+  line-height: 2vw;
+  border: 1px solid #efefef;
+  border-radius: 0.5vw;
 }
 
-#list li span {
-  background-color: #efefef;
-  margin: 0 0.3vw;
+#list li.out-dated-item div.item-detail {
+  background-color: rgba(239, 239, 239, 0.5);
+}
+
+#list li.today-item div.item-detail {
+  background-color: rgba(255, 221, 156, 0.5);
+  border: 1px solid rgba(255, 221, 156, 0.5);
+}
+
+#list li .item-detail span.detail-name {
+  margin: 0.5vw;
+  color: #2b2b2b;
+  padding: 0.05vw 1vw;
+  display: inline-block;
+  border-radius: 0.3vw;
+  box-shadow: 1px 1px 1px #d8d8d8;
+}
+
+#list li .item-detail span.detail-name:hover {
+  cursor: pointer;
+}
+
+#list li .item-detail span.detail-location {
+  margin-left: 0.5vw;
+  font-family: 'Exo 2', sans-serif;
+}
+
+#list li .item-detail span.detail-location .fa-map-marker-alt {
+  margin-right: 0.3vw;
+  transform: scale(0.8);
 }
 
 #nav li:hover {
