@@ -4,10 +4,6 @@ class List extends React.Component {
   constructor(props) {
     super(props)
 
-    this.state = {
-      values: []
-    }
-
     this.updateBand = this.updateBand.bind(this)
     this.findBandValues = this.findBandValues.bind(this)
   }
@@ -53,8 +49,18 @@ class List extends React.Component {
         </div>
         <div>
           Bands: { v.bands.map((vv, ii) => {
+                    let value = this.findBandValues(vv)
+                    let bgcolor = { backgroundColor: '#efefef' }
+
+                    for (i = 1; i < 11; i++) {
+                      if ( value == i ) {
+                        bgcolor = { backgroundColor: `rgb(255, ${ 230 - (i - 1) * 10 }, ${ 220 - (i - 1) * 20 })` }
+                        break
+                      }
+                    }
+
                     return (
-                      <span data-name={ vv } data-value={ this.findBandValues(vv) } key={ vv } onClick={ this.updateBand }>
+                      <span data-name={ vv } style={ bgcolor } data-value={ value } key={ vv } onClick={ this.updateBand }>
                         { vv }
                       </span>
                     )
