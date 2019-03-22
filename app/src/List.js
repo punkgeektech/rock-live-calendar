@@ -59,6 +59,10 @@ class List extends React.Component {
                       }
                     }
 
+                    if (value > 10) {
+                      bgcolor = { backgroundColor: 'rgb(255, 120 , 0)' }
+                    }
+
                     return (
                       <span data-name={ vv } style={ bgcolor } data-value={ value } key={ vv } onClick={ this.updateBand }>
                         { vv }
