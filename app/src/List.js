@@ -54,9 +54,11 @@ class List extends React.Component {
     const items = list.map((v, i, items) => {
       const month = now.getMonth() + 1
       const day = now.getDate()
+      // check if is today's date
       const ifNow = parseInt(v.date.substr(5, 2)) == month && parseInt(v.date.substr(8, 2)) == day
 
       return (
+        // add different classes depends on the date
         <li className={ new Date(v.date.replace(/(\d{4})-(\d{2})-(\d{2})/, "$1/$2/$3")) - now < 0 ? ( ifNow ? "list-item today-item" : "list-item out-dated-item" ) : "list-item"} key={ i }>
           <div className="item-date">
             {/* conbine same month date */}
