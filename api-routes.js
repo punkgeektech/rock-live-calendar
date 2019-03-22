@@ -5,9 +5,13 @@ const {google} = require('googleapis')
 const bandController = require('./controller/bandController')
 const listController = require('./controller/listController')
 
+// store the result feching from google calendar
 let result = []
+
+// store the bands name and value
 let bands_list = []
 
+// google calendar api call
 const SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
 const TOKEN_PATH = 'token.json'
 
@@ -60,11 +64,12 @@ function listEvents(auth) {
     const events = res.data.items
     if (events.length) {
       events.map((event, i) => {
+        // feched data formatting
         const start = event.start.dateTime || event.start.date;
         const bands = event.summary.slice(0, event.summary.lastIndexOf('@')).trim('').split(', ')
         const location = event.summary.slice(event.summary.lastIndexOf('@') + 2)
-        let value_list = []
 
+        // store every split band
         bands.map((v) => {
           const data = { name: v }
           bands_list.push(data)
@@ -73,8 +78,7 @@ function listEvents(auth) {
         const data = {
           date: start,
           bands: bands,
-          location: location,
-          values: value_list
+          location: location
         }
         result.push(data)
       })
@@ -86,6 +90,7 @@ function listEvents(auth) {
 
 fs.readFile('credentials.json', (err, content) => {
   if (err) return console.log('Error loading client secret file:', err)
+  // call fetch google calendar events
   authorize(JSON.parse(content), listEvents)
 })
 
@@ -94,8 +99,11 @@ router.get('/', (req, res) => {
   res.send(JSON.stringify(result))
 })
 
+// feching data manually
 router.get('/fetch', (req, res) => {
+  // store band list to database
   bandController.new(bands_list)
+  // store event list to database
   listController.new(result)
   res.send('Fetch Complete')
 })

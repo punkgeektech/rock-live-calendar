@@ -9,10 +9,10 @@ class App extends React.Component {
     super(props)
 
     this.state = {
-      data: [],
-      months: [],
-      current: null,
-      bandValues: []
+      data: [],    // store event list
+      months: [],    // store available months for current year
+      current: null,    // active month
+      bandValues: []    // store band value pairs
     }
 
     this.getMonths = this.getMonths.bind(this)
@@ -49,6 +49,7 @@ class App extends React.Component {
     }
 
     for (let i = parseInt(start_month); i <= parseInt(end_month); i++) {
+      // generate month list
       months_list.push(i)
     }
 

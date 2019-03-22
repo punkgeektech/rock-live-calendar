@@ -15,9 +15,9 @@ exports.index = function (req, res) {
     })
   })
 
-  Bands.count({}, function( err, count){
-    console.log( "Number of bands:", count )
-  })
+  // Bands.count({}, function( err, count){
+  //   console.log( "Number of bands:", count )
+  // })
 }
 
 exports.new = function (data) {
@@ -31,16 +31,6 @@ exports.new = function (data) {
         newband.save()
       }
     })
-  })
-}
-
-exports.getValue = function (name, callback) {
-  Bands.findOne({ name: name }, function(err, band) {
-    if (err) {
-      callback(err, null)
-    } else {
-      callback(null, band)
-    }
   })
 }
 

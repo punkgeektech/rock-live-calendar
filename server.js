@@ -12,9 +12,11 @@ app.use(bodyParser.urlencoded({
 
 app.use(bodyParser.json())
 
+// mongodb connection
 mongoose.connect('mongodb://127.0.0.1:27017/rocklivecalendar')
 var db = mongoose.connection
 
+// Cross-origin resource sharing
 app.use(cors())
 
 app.get('/', (req, res) => res.send('我想想这个页面放啥'))
