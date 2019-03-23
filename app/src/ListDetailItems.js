@@ -33,7 +33,7 @@ class ListDetailItems extends React.Component {
         <div className="item-detail">
           { v.bands.map((vv, ii) => {
               let value = this.findBandValues(vv)
-              let bgcolor = { backgroundColor: '#a2aac5' }
+              let bgcolor = { backgroundColor: 'rgba(162,170,197,0.1)' }
 
               for (i = 1; i < 11; i++) {
                 if ( value == i ) {
