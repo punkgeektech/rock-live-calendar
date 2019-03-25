@@ -39,11 +39,12 @@ class CalendarMonth extends React.Component {
     const maxDays = this.daysInMonth(this.props.current, 2019)
     const drawMonth = this.state.monthLength.map((v, i) => {
       const d = new Date()
-      const now = d.getDate()
+      const nowDay = d.getDate()
+      const nowMonth = d.getMonth() + 1
 
       return (
         <li key={ i }className={ i % 7 == 0 ? 'week-end' : '' }>
-          <a href={`#2019-${ this.props.current < 10 ? "0"+this.props.current : this.props.current }-${ (i + 1 - firstDayWeek) < 10 ? "0"+(i + 1 - firstDayWeek) : (i + 1 - firstDayWeek) }`} className={ i + 1 - firstDayWeek < now ? 'bggrey' : (i + 1 - firstDayWeek == now ? 'bgactive' : '') }>
+          <a href={`#2019-${ this.props.current < 10 ? "0"+this.props.current : this.props.current }-${ (i + 1 - firstDayWeek) < 10 ? "0"+(i + 1 - firstDayWeek) : (i + 1 - firstDayWeek) }`} className={ this.props.current != nowMonth ? ((this.props.current < nowMonth) ? 'bggrey' : '') : (i + 1 - firstDayWeek < nowDay ? 'bggrey' : (i + 1 - firstDayWeek == nowDay ? 'bgactive' : '')) }>
             { firstDayWeek != undefined ? (((i + 1 - firstDayWeek) > maxDays) || ((i + 1 - firstDayWeek) < 1) ? '' : i + 1 - firstDayWeek) : '' }
           </a>
         </li>
