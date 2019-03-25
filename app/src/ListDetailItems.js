@@ -26,7 +26,7 @@ class ListDetailItems extends React.Component {
 
     return (
       <li className={ new Date(v.date.replace(/(\d{4})-(\d{2})-(\d{2})/, "$1/$2/$3")) - this.props.now < 0 ? ( this.props.ifNow ? "list-item today-item" : "list-item out-dated-item" ) : "list-item"}>
-        <div className="item-date">
+        <div className="item-date" id={ items[i].date == (items[i - 1] != undefined ? items[i - 1] : items[items.length - 1]).date ? '' : `${items[i].date}` }>
           {/* conbine same month date */}
           { items[i].date == (items[i - 1] != undefined ? items[i - 1] : items[items.length - 1]).date ? '' : items[i].date }
         </div>

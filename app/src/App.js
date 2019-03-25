@@ -1,6 +1,7 @@
 import React from 'react'
 import List from './List'
 import Nav from './Nav'
+import Calendar from './Calendar'
 
 import './App.css'
 
@@ -71,6 +72,7 @@ class App extends React.Component {
       <div id="wrapper">
         <Nav data={ this.state.months } navClick={ this.navClickHandler } />
         <List data={ this.state.data } currentMonth={ this.state.current } values={ this.state.bandValues } />
+        <Calendar data={ this.state.data } months={ this.state.months } current={ this.state.current } />
       </div>
     )
   }

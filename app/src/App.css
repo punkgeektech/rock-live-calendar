@@ -136,3 +136,39 @@ html, body {
 #nav li:hover {
   cursor: pointer;
 }
+
+#float-calendar {
+  position: fixed;
+  right: 5vw;
+}
+
+.calendar-month li {
+  list-style-type: none;
+  border: 1px solid #efefef;
+  float: left;
+  margin: 1px;
+  width: 2vw;
+  height: 2vw;
+  text-align: center;
+  line-height: 2vw;
+}
+.calendar-month li a {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  color: inherit;
+  text-decoration: none;
+}
+.calendar-month li a:hover {
+  color: rgb(113, 131, 187);
+}
+.calendar-month li a.bggrey {
+  background-color: rgba(239, 239, 239, 0.5);
+}
+.calendar-month li a.bgactive {
+  background-color: rgba(255, 221, 156, 0.5);
+}
+.calendar-month li.week-end {
+  clear: left;
+}
