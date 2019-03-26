@@ -172,3 +172,28 @@ html, body {
 .calendar-month li.week-end {
   clear: left;
 }
+
+ul#band-rank {
+  position: fixed;
+  right: 5vw;
+  top: 18vw;
+  border: 1px solid #efefef;
+  border-bottom: none;
+  margin: 0;
+  padding: 0;
+  width: calc(14vw + 26px);
+}
+
+ul#band-rank h5 {
+  margin: 0;
+  padding: 0.5vw 1vw;
+  border-bottom: 1px solid #efefef;
+  background-color: rgb(113, 131, 187);
+  color: white;
+}
+
+ul#band-rank li {
+  list-style-type: none;
+  padding: 0.5vw 1vw;
+  border-bottom: 1px solid #efefef;
+}
