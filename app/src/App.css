@@ -37,6 +37,12 @@ html, body {
   color: #454545;
 }
 
+#logo {
+  position: fixed;
+  width: 10vw;
+  left: 0;
+}
+
 #wrapper {
   display: flex;
   width: 50vw;

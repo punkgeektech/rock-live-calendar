@@ -69,12 +69,15 @@ class App extends React.Component {
 
   render() {
     return (
-      <div id="wrapper">
-        <Nav data={ this.state.months } navClick={ this.navClickHandler } />
-        <List data={ this.state.data } currentMonth={ this.state.current } values={ this.state.bandValues } />
-        <Calendar data={ this.state.data } months={ this.state.months } current={ this.state.current } />
-        <BandRank data={ this.state.bandValues } />
-      </div>
+      <React.Fragment>
+        <img id="logo" src="./guitar.svg" />
+        <div id="wrapper">
+          <Nav data={ this.state.months } navClick={ this.navClickHandler } />
+          <List data={ this.state.data } currentMonth={ this.state.current } values={ this.state.bandValues } />
+          <Calendar data={ this.state.data } months={ this.state.months } current={ this.state.current } />
+          <BandRank data={ this.state.bandValues } />
+        </div>
+      </React.Fragment>
     )
   }
 }
