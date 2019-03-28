@@ -70,7 +70,7 @@ class App extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <img id="logo" src="./guitar.svg" />
+        {/*<img id="logo" src="./guitar.svg" />*/}
         <div id="wrapper">
           <Nav data={ this.state.months } navClick={ this.navClickHandler } />
           <List data={ this.state.data } currentMonth={ this.state.current } values={ this.state.bandValues } />
