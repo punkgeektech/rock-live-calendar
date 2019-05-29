@@ -11,7 +11,7 @@ class BandRank extends React.Component {
     })
 
     const rankItems = sortedList.slice(0, 10).map((v, i) => {
-      if (v.value > 1) {
+      if (v.value >= 1) {
         return (
           <li key={ i }>{ v.name }</li>
         )
